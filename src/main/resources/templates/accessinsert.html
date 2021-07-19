@@ -1,0 +1,287 @@
+﻿<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>吴彦祖停车场</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body>
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<!-- begin::sidebar -->
+<!--<div class="sidebar" th:replace="model::menu1"></div>-->
+<!-- end::sidebar -->
+<!-- ******************************************* -->
+<!-- begin::side menu -->
+<div class="side-menu" th:replace="model::menu2"></div>
+<!-- ******************************************* -->
+<!-- end::side menu -->
+
+<!-- begin::navbar -->
+<nav class="navbar" th:replace="model::menu3"></nav>
+<!-- end::navbar -->
+
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>Vip管理</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-t-0">
+                    <li class="breadcrumb-item"><a href="#">主页</a></li>
+                    <li class="breadcrumb-item"><a href="#">VIP办理</a></li>
+                </ol>
+            </nav>
+        </div>
+        <!-- end::page header -->
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">vip办理</h5>
+                <form class="needs-validation" novalidate action="/insertAss" method="post" onsubmit="return tijiao()"
+                      name="assform">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">车主姓名</label>
+                            <input type="text" name="accessName" class="form-control" id="validationTooltip0"
+                                   placeholder="用户"
+                                   required="required">
+
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">手机号</label>
+                            <input type="text" name="accessPhone" class="form-control" id="assphone" placeholder="phone"
+                                   required="required" onblur="lost1()"><span id="ennorname"></span>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">车牌号</label>
+                            <input type="text" name="accessNum" class="form-control" id="carnum" placeholder="num"
+                                   required="required" onblur="lost()"><span id="ennorname1"></span>
+
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">车颜色</label>
+                            <input type="text" name="accessColor" class="form-control" id="validationTooltip01"
+                                   placeholder="color"
+                                   required="required">
+
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">品牌</label>
+                            <input type="text" name="accessBrand" class="form-control" id="validationTooltip01"
+                                   placeholder="brand"
+                                   required="required">
+
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">办理类别</label>
+                            <select class="form-control m-bot15" name="accessType">
+                                <option>月卡</option>
+                                <option>季卡</option>
+                                <option>年卡</option>
+                                <option>免费</option>
+                            </select>
+                            <!--                            <input type="text"  name="accessType" class="form-control" id="validationTooltip01" placeholder="type"-->
+                            <!--                                   required="required"  >-->
+                            <!--                            <div class="valid-tooltip">-->
+                            <!--                                正确-->
+                            <!--                            </div>-->
+                        </div>
+                        <p th:text="${ass}"></p>
+                        <div style="width: 100px">
+                            <br>
+                            <button type="submit" class="btn btn-primary offset-md-4 active">完成</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--查询vip用户-->
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h5>查看</h5>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <form action="/findnumAss" method="post">
+                        <input type="text" name="accessNum" class="form-control" id="validationTooltip02"
+                               placeholder="晋M35732">
+                        <span style="position: absolute;top:1%;left:100% ;width: 60px"><button type="submit"
+                                                                                               class="btn btn-primary  ">查询</button></span>
+                    </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>车主</th>
+                            <th>手机号</th>
+                            <th>车牌号</th>
+                            <th>办理业务</th>
+                            <th>办理时间</th>
+                            <th>到期时间</th>
+                            <th>操作</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ass:${find}">
+                            <form action="/updateAsss" method="post" name="upform" onsubmit="return tijiao1()">
+
+                                <input type="hidden" name="accessId" th:value="${ass.accessId}">
+                                <td class="col-sm-1"><input type="text" name="accessName" th:value="${ass.accessName}">
+                                </td>
+                                <td class="col-sm-2"><input type="text" name="accessPhone" th:value="${ass.accessPhone}"
+                                                            id="accphone"></td>
+                                <td class="col-sm-2"><input type="text" name="accessNum" th:value="${ass.accessNum}"
+                                                            id="accnum"></td>
+                                <td th:text="${ass.accessType}"></td>
+                                <td th:text="${ass.accessTime}">New York</td>
+                                <td th:text="${ass.accessOuttime}">New York</td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary  ">修改信息</button>
+
+                                    <a class=" btn btn-danger btn-sm"
+                                       th:href="@{/deleteAss(accessNum=${ass.accessNum},accessTime=${ass.accessTime})}"><i
+                                            class="icon_close_alt2"></i>删除</a>
+                                    <!--                                <a class="btn btn-danger" th:href="@{/updateCar(carId=${car.carId})}"><i class="icon_close_alt2"></i>删除</a>-->
+                                </td>
+                            </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+</main>
+<!-- end::main content -->
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+<script src="jss/jquery-1.12.4.js"></script>
+<script>
+
+
+    function lost1() {
+        var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|4|5|6|7|8|9])\d{8}$/;
+        var rege = document.assform.accessPhone.value;
+
+        if (reg.test(rege)) {
+            document.getElementById("ennorname").className = "span_success";
+            document.getElementById("ennorname").innerHTML = "成功";
+            return true;
+        } else {
+
+            document.getElementById("ennorname").className = "span_error";
+            document.getElementById("ennorname").innerHTML = "手机号码格式不正确";
+            return false;
+        }
+    }
+
+    function lost() {
+        var reg = /^([京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][1-9DF][1-9ABCDEFGHJKLMNPQRSTUVWXYZ]\d{3}[1-9DF]|[京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][\dABCDEFGHJKLNMxPQRSTUVWXYZ]{5})$/
+        var rege = document.assform.accessNum.value;
+
+        if (reg.test(rege)) {
+            document.getElementById("ennorname1").className = "span_success";
+            document.getElementById("ennorname1").innerHTML = "成功";
+            return true;
+        } else {
+            document.getElementById("ennorname1").className = "span_error";
+            document.getElementById("ennorname1").innerHTML = "输入车牌不正确";
+            return false;
+        }
+    }
+
+
+    function tijiao() {
+        var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|4|5|6|7|8|9])\d{8}$/;
+        var rege = document.assform.accessPhone.value;
+
+        if (reg.test(rege)) {
+            document.getElementById("ennorname").className = "span_success";
+            document.getElementById("ennorname").innerHTML = "成功";
+            return true;
+        } else {
+
+            document.getElementById("ennorname").className = "span_error";
+            document.getElementById("ennorname").innerHTML = "手机确";
+            return false;
+        }
+        var reg = /^([京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][1-9DF][1-9ABCDEFGHJKLMNPQRSTUVWXYZ]\d{3}[1-9DF]|[京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][\dABCDEFGHJKLNMxPQRSTUVWXYZ]{5})$/
+        var rege = document.assform.accessNum.value;
+
+        if (reg.test(rege)) {
+            document.getElementById("ennorname1").className = "span_success";
+            document.getElementById("ennorname1").innerHTML = "成功";
+            return true;
+        } else {
+            document.getElementById("ennorname1").className = "span_error";
+            document.getElementById("ennorname1").innerHTML = "输入车牌不正确";
+            return false;
+        }
+    }
+
+
+    function tijiao1() {
+        var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|4|5|6|7|8|9])\d{8}$/;
+        var rege = document.upform.accessPhone.value;
+
+        if (reg.test(rege)) {
+
+            return true;
+        } else {
+            alert("手机号格式不正确");
+            return false;
+        }
+        var reg = /^([京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][1-9DF][1-9ABCDEFGHJKLMNPQRSTUVWXYZ]\d{3}[1-9DF]|[京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][\dABCDEFGHJKLNMxPQRSTUVWXYZ]{5})$/
+        var rege = document.upform.accessNum.value;
+
+        if (reg.test(rege)) {
+
+            return true;
+        } else {
+            alert("车牌格式不正确");
+            return false;
+        }
+    }
+
+
+</script>
+
+</html>

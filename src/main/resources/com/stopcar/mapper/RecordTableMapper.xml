@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stopcar.mapper.RecordTableMapper">
+    <resultMap id="BaseResultMap" type="com.stopcar.pojo.RecordTable">
+        <id column="record_id" property="recordId" jdbcType="INTEGER"/>
+        <result column="record_num" property="recordNum" jdbcType="VARCHAR"/>
+        <result column="record_gotime" property="recordGotime" jdbcType="VARCHAR"/>
+        <result column="record_lvtime" property="recordLvtime" jdbcType="VARCHAR"/>
+        <result column="access_type" property="accessType" jdbcType="VARCHAR"/>
+        <result column="record_cost" property="recordCost" jdbcType="INTEGER"/>
+        <result column="car_port" property="carPort" jdbcType="VARCHAR"/>
+        <result column="record_start" property="recordStart" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        record_id, record_num, record_gotime, record_lvtime, access_type, record_cost, car_port,
+        record_start
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.stopcar.pojo.RecordTableExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from record_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from record_table
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from record_table
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.stopcar.pojo.RecordTableExample">
+        delete from record_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.stopcar.pojo.RecordTable">
+        insert into record_table (record_id, record_num, record_gotime,
+        record_lvtime, access_type, record_cost,
+        car_port, record_start)
+        values (#{recordId,jdbcType=INTEGER}, #{recordNum,jdbcType=VARCHAR}, #{recordGotime,jdbcType=VARCHAR},
+        #{recordLvtime,jdbcType=VARCHAR}, #{accessType,jdbcType=VARCHAR}, #{recordCost,jdbcType=INTEGER},
+        #{carPort,jdbcType=VARCHAR}, #{recordStart,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.stopcar.pojo.RecordTable">
+        insert into record_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">
+                record_id,
+            </if>
+            <if test="recordNum != null">
+                record_num,
+            </if>
+            <if test="recordGotime != null">
+                record_gotime,
+            </if>
+            <if test="recordLvtime != null">
+                record_lvtime,
+            </if>
+            <if test="accessType != null">
+                access_type,
+            </if>
+            <if test="recordCost != null">
+                record_cost,
+            </if>
+            <if test="carPort != null">
+                car_port,
+            </if>
+            <if test="recordStart != null">
+                record_start,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="recordId != null">
+                #{recordId,jdbcType=INTEGER},
+            </if>
+            <if test="recordNum != null">
+                #{recordNum,jdbcType=VARCHAR},
+            </if>
+            <if test="recordGotime != null">
+                #{recordGotime,jdbcType=VARCHAR},
+            </if>
+            <if test="recordLvtime != null">
+                #{recordLvtime,jdbcType=VARCHAR},
+            </if>
+            <if test="accessType != null">
+                #{accessType,jdbcType=VARCHAR},
+            </if>
+            <if test="recordCost != null">
+                #{recordCost,jdbcType=INTEGER},
+            </if>
+            <if test="carPort != null">
+                #{carPort,jdbcType=VARCHAR},
+            </if>
+            <if test="recordStart != null">
+                #{recordStart,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.stopcar.pojo.RecordTableExample" resultType="java.lang.Integer">
+        select count(*) from record_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <select id="sumBy" parameterType="com.stopcar.pojo.RecordTableExample" resultType="java.lang.Integer">
+        select SUM(record_cost)
+        from record_table
+
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update record_table
+        <set>
+            <if test="record.recordId != null">
+                record_id = #{record.recordId,jdbcType=INTEGER},
+            </if>
+            <if test="record.recordNum != null">
+                record_num = #{record.recordNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordGotime != null">
+                record_gotime = #{record.recordGotime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordLvtime != null">
+                record_lvtime = #{record.recordLvtime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessType != null">
+                access_type = #{record.accessType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordCost != null">
+                record_cost = #{record.recordCost,jdbcType=INTEGER},
+            </if>
+            <if test="record.carPort != null">
+                car_port = #{record.carPort,jdbcType=VARCHAR},
+            </if>
+            <if test="record.recordStart != null">
+                record_start = #{record.recordStart,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update record_table
+        set record_id = #{record.recordId,jdbcType=INTEGER},
+        record_num = #{record.recordNum,jdbcType=VARCHAR},
+        record_gotime = #{record.recordGotime,jdbcType=VARCHAR},
+        record_lvtime = #{record.recordLvtime,jdbcType=VARCHAR},
+        access_type = #{record.accessType,jdbcType=VARCHAR},
+        record_cost = #{record.recordCost,jdbcType=INTEGER},
+        car_port = #{record.carPort,jdbcType=VARCHAR},
+        record_start = #{record.recordStart,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.stopcar.pojo.RecordTable">
+        update record_table
+        <set>
+            <if test="recordNum != null">
+                record_num = #{recordNum,jdbcType=VARCHAR},
+            </if>
+            <if test="recordGotime != null">
+                record_gotime = #{recordGotime,jdbcType=VARCHAR},
+            </if>
+            <if test="recordLvtime != null">
+                record_lvtime = #{recordLvtime,jdbcType=VARCHAR},
+            </if>
+            <if test="accessType != null">
+                access_type = #{accessType,jdbcType=VARCHAR},
+            </if>
+            <if test="recordCost != null">
+                record_cost = #{recordCost,jdbcType=INTEGER},
+            </if>
+            <if test="carPort != null">
+                car_port = #{carPort,jdbcType=VARCHAR},
+            </if>
+            <if test="recordStart != null">
+                record_start = #{recordStart,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.stopcar.pojo.RecordTable">
+        update record_table
+        set record_num = #{recordNum,jdbcType=VARCHAR},
+        record_gotime = #{recordGotime,jdbcType=VARCHAR},
+        record_lvtime = #{recordLvtime,jdbcType=VARCHAR},
+        access_type = #{accessType,jdbcType=VARCHAR},
+        record_cost = #{recordCost,jdbcType=INTEGER},
+        car_port = #{carPort,jdbcType=VARCHAR},
+        record_start = #{recordStart,jdbcType=VARCHAR}
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

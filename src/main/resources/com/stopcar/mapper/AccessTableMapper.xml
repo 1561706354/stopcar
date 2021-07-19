@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stopcar.mapper.AccessTableMapper">
+    <resultMap id="BaseResultMap" type="com.stopcar.pojo.AccessTable">
+        <id column="access_id" property="accessId" jdbcType="INTEGER"/>
+        <result column="access_name" property="accessName" jdbcType="VARCHAR"/>
+        <result column="access_phone" property="accessPhone" jdbcType="VARCHAR"/>
+        <result column="access_num" property="accessNum" jdbcType="VARCHAR"/>
+        <result column="access_color" property="accessColor" jdbcType="VARCHAR"/>
+        <result column="access_brand" property="accessBrand" jdbcType="VARCHAR"/>
+        <result column="access_type" property="accessType" jdbcType="VARCHAR"/>
+        <result column="access_time" property="accessTime" jdbcType="VARCHAR"/>
+        <result column="access_outtime" property="accessOuttime" jdbcType="VARCHAR"/>
+        <result column="access_outday" property="accessOutday" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        access_id, access_name, access_phone, access_num, access_color, access_brand, access_type,
+        access_time, access_outtime, access_outday
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.stopcar.pojo.AccessTableExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from access_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from access_table
+        where access_id = #{accessId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from access_table
+        where access_id = #{accessId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.stopcar.pojo.AccessTableExample">
+        delete from access_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.stopcar.pojo.AccessTable">
+        insert into access_table (access_id, access_name, access_phone,
+        access_num, access_color, access_brand,
+        access_type, access_time, access_outtime,
+        access_outday)
+        values (#{accessId,jdbcType=INTEGER}, #{accessName,jdbcType=VARCHAR}, #{accessPhone,jdbcType=VARCHAR},
+        #{accessNum,jdbcType=VARCHAR}, #{accessColor,jdbcType=VARCHAR}, #{accessBrand,jdbcType=VARCHAR},
+        #{accessType,jdbcType=VARCHAR}, #{accessTime,jdbcType=VARCHAR}, #{accessOuttime,jdbcType=VARCHAR},
+        #{accessOutday,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.stopcar.pojo.AccessTable">
+        insert into access_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accessId != null">
+                access_id,
+            </if>
+            <if test="accessName != null">
+                access_name,
+            </if>
+            <if test="accessPhone != null">
+                access_phone,
+            </if>
+            <if test="accessNum != null">
+                access_num,
+            </if>
+            <if test="accessColor != null">
+                access_color,
+            </if>
+            <if test="accessBrand != null">
+                access_brand,
+            </if>
+            <if test="accessType != null">
+                access_type,
+            </if>
+            <if test="accessTime != null">
+                access_time,
+            </if>
+            <if test="accessOuttime != null">
+                access_outtime,
+            </if>
+            <if test="accessOutday != null">
+                access_outday,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accessId != null">
+                #{accessId,jdbcType=INTEGER},
+            </if>
+            <if test="accessName != null">
+                #{accessName,jdbcType=VARCHAR},
+            </if>
+            <if test="accessPhone != null">
+                #{accessPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="accessNum != null">
+                #{accessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accessColor != null">
+                #{accessColor,jdbcType=VARCHAR},
+            </if>
+            <if test="accessBrand != null">
+                #{accessBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="accessType != null">
+                #{accessType,jdbcType=VARCHAR},
+            </if>
+            <if test="accessTime != null">
+                #{accessTime,jdbcType=VARCHAR},
+            </if>
+            <if test="accessOuttime != null">
+                #{accessOuttime,jdbcType=VARCHAR},
+            </if>
+            <if test="accessOutday != null">
+                #{accessOutday,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.stopcar.pojo.AccessTableExample" resultType="java.lang.Integer">
+        select count(*) from access_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update access_table
+        <set>
+            <if test="record.accessId != null">
+                access_id = #{record.accessId,jdbcType=INTEGER},
+            </if>
+            <if test="record.accessName != null">
+                access_name = #{record.accessName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessPhone != null">
+                access_phone = #{record.accessPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessNum != null">
+                access_num = #{record.accessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessColor != null">
+                access_color = #{record.accessColor,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessBrand != null">
+                access_brand = #{record.accessBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessType != null">
+                access_type = #{record.accessType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessTime != null">
+                access_time = #{record.accessTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessOuttime != null">
+                access_outtime = #{record.accessOuttime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accessOutday != null">
+                access_outday = #{record.accessOutday,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update access_table
+        set access_id = #{record.accessId,jdbcType=INTEGER},
+        access_name = #{record.accessName,jdbcType=VARCHAR},
+        access_phone = #{record.accessPhone,jdbcType=VARCHAR},
+        access_num = #{record.accessNum,jdbcType=VARCHAR},
+        access_color = #{record.accessColor,jdbcType=VARCHAR},
+        access_brand = #{record.accessBrand,jdbcType=VARCHAR},
+        access_type = #{record.accessType,jdbcType=VARCHAR},
+        access_time = #{record.accessTime,jdbcType=VARCHAR},
+        access_outtime = #{record.accessOuttime,jdbcType=VARCHAR},
+        access_outday = #{record.accessOutday,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.stopcar.pojo.AccessTable">
+        update access_table
+        <set>
+            <if test="accessName != null">
+                access_name = #{accessName,jdbcType=VARCHAR},
+            </if>
+            <if test="accessPhone != null">
+                access_phone = #{accessPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="accessNum != null">
+                access_num = #{accessNum,jdbcType=VARCHAR},
+            </if>
+            <if test="accessColor != null">
+                access_color = #{accessColor,jdbcType=VARCHAR},
+            </if>
+            <if test="accessBrand != null">
+                access_brand = #{accessBrand,jdbcType=VARCHAR},
+            </if>
+            <if test="accessType != null">
+                access_type = #{accessType,jdbcType=VARCHAR},
+            </if>
+            <if test="accessTime != null">
+                access_time = #{accessTime,jdbcType=VARCHAR},
+            </if>
+            <if test="accessOuttime != null">
+                access_outtime = #{accessOuttime,jdbcType=VARCHAR},
+            </if>
+            <if test="accessOutday != null">
+                access_outday = #{accessOutday,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where access_id = #{accessId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.stopcar.pojo.AccessTable">
+        update access_table
+        set access_name = #{accessName,jdbcType=VARCHAR},
+        access_phone = #{accessPhone,jdbcType=VARCHAR},
+        access_num = #{accessNum,jdbcType=VARCHAR},
+        access_color = #{accessColor,jdbcType=VARCHAR},
+        access_brand = #{accessBrand,jdbcType=VARCHAR},
+        access_type = #{accessType,jdbcType=VARCHAR},
+        access_time = #{accessTime,jdbcType=VARCHAR},
+        access_outtime = #{accessOuttime,jdbcType=VARCHAR},
+        access_outday = #{accessOutday,jdbcType=VARCHAR}
+        where access_id = #{accessId,jdbcType=INTEGER}
+    </update>
+</mapper>

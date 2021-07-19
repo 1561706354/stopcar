@@ -1,0 +1,155 @@
+﻿<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>吴彦祖停车场</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body>
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<!-- begin::sidebar -->
+<!--<div class="sidebar" th:replace="model::menu1"></div>-->
+<!-- end::sidebar -->
+<!-- ******************************************* -->
+<!-- begin::side menu -->
+<div class="side-menu" th:replace="model::menu2"></div>
+<!-- ******************************************* -->
+<!-- end::side menu -->
+
+<!-- begin::navbar -->
+<nav class="navbar" th:replace="model::menu3"></nav>
+<!-- end::navbar -->
+
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>Vip管理</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-t-0">
+                    <li class="breadcrumb-item"><a href="#">主页</a></li>
+                    <li class="breadcrumb-item"><a href="#">VIP办理</a></li>
+                </ol>
+            </nav>
+        </div>
+        <!-- end::page header -->
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">vip办理</h5>
+                <form class="needs-validation" novalidate action="/updateAss" method="post" name="xufei"
+                      onsubmit="return tijiao1()">
+                    <div class="form-row">
+
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">车牌号</label>
+                            <input type="text" name="accessNum" class="form-control" id="validationTooltip01"
+                                   placeholder="num"
+                                   required="required" onblur="lost1()"><span id="enn"></span>
+
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="validationTooltip01">办理类别</label>
+                            <select class="form-control m-bot15" name="accessType">
+                                <option>月卡</option>
+                                <option>季卡</option>
+                                <option>年卡</option>
+                                <option>免费</option>
+                            </select>
+                            <!--                            <input type="text"  name="accessType" class="form-control" id="validationTooltip01" placeholder="type"-->
+                            <!--                                   required="required"  >-->
+                            <!--                            <div class="valid-tooltip">-->
+                            <!--                                正确-->
+                            <!--                            </div>-->
+                        </div>
+                        <p th:text="${assfind}"></p>
+                        <p th:text="${acc}"></p>
+                        <div style="width: 100px">
+                            <br>
+                            <button type="submit" class="btn btn-primary offset-md-4 active">完成</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
+
+</main>
+<!-- end::main content -->
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+<script src="jss/jquery-1.12.4.js"></script>
+<script>
+
+
+    function lost1() {
+        var reg = /^([京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][1-9DF][1-9ABCDEFGHJKLMNPQRSTUVWXYZ]\d{3}[1-9DF]|[京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][\dABCDEFGHJKLNMxPQRSTUVWXYZ]{5})$/
+        var rege = document.xufei.accessNum.value;
+
+        if (reg.test(rege)) {
+            document.getElementById("enn").className = "span_success";
+            document.getElementById("enn").innerHTML = "成功";
+            return true;
+        } else {
+            document.getElementById("enn").className = "span_error";
+            document.getElementById("enn").innerHTML = "输入车牌不正确";
+            return false;
+        }
+    }
+
+
+    function tijiao1() {
+
+        var reg = /^([京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][1-9DF][1-9ABCDEFGHJKLMNPQRSTUVWXYZ]\d{3}[1-9DF]|[京津晋冀蒙辽吉黑沪苏浙皖闽赣鲁豫鄂湘粤桂琼渝川贵云藏陕甘青宁新][ABCDEFGHJKLMNPQRSTUVWXY][\dABCDEFGHJKLNMxPQRSTUVWXYZ]{5})$/
+        var rege = document.xufei.accessNum.value;
+
+        if (reg.test(rege)) {
+            document.getElementById("enn").className = "span_success";
+            document.getElementById("enn").innerHTML = "成功";
+            return true;
+        } else {
+            document.getElementById("enn").className = "span_error";
+            document.getElementById("enn").innerHTML = "输入车牌不正确";
+            return false;
+        }
+    }
+
+
+</script>
+</html>

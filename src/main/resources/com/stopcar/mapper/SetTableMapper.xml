@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stopcar.mapper.SetTableMapper">
+    <resultMap id="BaseResultMap" type="com.stopcar.pojo.SetTable">
+        <id column="set_id" property="setId" jdbcType="INTEGER"/>
+        <result column="set_name" property="setName" jdbcType="VARCHAR"/>
+        <result column="set_pwd" property="setPwd" jdbcType="VARCHAR"/>
+        <result column="set_price" property="setPrice" jdbcType="INTEGER"/>
+        <result column="set_month" property="setMonth" jdbcType="DECIMAL"/>
+        <result column="set_year" property="setYear" jdbcType="DECIMAL"/>
+        <result column="set_type" property="setType" jdbcType="VARCHAR"/>
+        <result column="set_time" property="setTime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        set_id, set_name, set_pwd, set_price, set_month, set_year, set_type, set_time
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.stopcar.pojo.SetTableExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from set_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from set_table
+        where set_id = #{setId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from set_table
+        where set_id = #{setId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.stopcar.pojo.SetTableExample">
+        delete from set_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.stopcar.pojo.SetTable">
+        insert into set_table (set_id, set_name, set_pwd,
+        set_price, set_month, set_year,
+        set_type, set_time)
+        values (#{setId,jdbcType=INTEGER}, #{setName,jdbcType=VARCHAR}, #{setPwd,jdbcType=VARCHAR},
+        #{setPrice,jdbcType=INTEGER}, #{setMonth,jdbcType=DECIMAL}, #{setYear,jdbcType=DECIMAL},
+        #{setType,jdbcType=VARCHAR}, #{setTime,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.stopcar.pojo.SetTable">
+        insert into set_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setId != null">
+                set_id,
+            </if>
+            <if test="setName != null">
+                set_name,
+            </if>
+            <if test="setPwd != null">
+                set_pwd,
+            </if>
+            <if test="setPrice != null">
+                set_price,
+            </if>
+            <if test="setMonth != null">
+                set_month,
+            </if>
+            <if test="setYear != null">
+                set_year,
+            </if>
+            <if test="setType != null">
+                set_type,
+            </if>
+            <if test="setTime != null">
+                set_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setId != null">
+                #{setId,jdbcType=INTEGER},
+            </if>
+            <if test="setName != null">
+                #{setName,jdbcType=VARCHAR},
+            </if>
+            <if test="setPwd != null">
+                #{setPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="setPrice != null">
+                #{setPrice,jdbcType=INTEGER},
+            </if>
+            <if test="setMonth != null">
+                #{setMonth,jdbcType=DECIMAL},
+            </if>
+            <if test="setYear != null">
+                #{setYear,jdbcType=DECIMAL},
+            </if>
+            <if test="setType != null">
+                #{setType,jdbcType=VARCHAR},
+            </if>
+            <if test="setTime != null">
+                #{setTime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.stopcar.pojo.SetTableExample" resultType="java.lang.Integer">
+        select count(*) from set_table
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update set_table
+        <set>
+            <if test="record.setId != null">
+                set_id = #{record.setId,jdbcType=INTEGER},
+            </if>
+            <if test="record.setName != null">
+                set_name = #{record.setName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.setPwd != null">
+                set_pwd = #{record.setPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.setPrice != null">
+                set_price = #{record.setPrice,jdbcType=INTEGER},
+            </if>
+            <if test="record.setMonth != null">
+                set_month = #{record.setMonth,jdbcType=DECIMAL},
+            </if>
+            <if test="record.setYear != null">
+                set_year = #{record.setYear,jdbcType=DECIMAL},
+            </if>
+            <if test="record.setType != null">
+                set_type = #{record.setType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.setTime != null">
+                set_time = #{record.setTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update set_table
+        set set_id = #{record.setId,jdbcType=INTEGER},
+        set_name = #{record.setName,jdbcType=VARCHAR},
+        set_pwd = #{record.setPwd,jdbcType=VARCHAR},
+        set_price = #{record.setPrice,jdbcType=INTEGER},
+        set_month = #{record.setMonth,jdbcType=DECIMAL},
+        set_year = #{record.setYear,jdbcType=DECIMAL},
+        set_type = #{record.setType,jdbcType=VARCHAR},
+        set_time = #{record.setTime,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.stopcar.pojo.SetTable">
+        update set_table
+        <set>
+            <if test="setName != null">
+                set_name = #{setName,jdbcType=VARCHAR},
+            </if>
+            <if test="setPwd != null">
+                set_pwd = #{setPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="setPrice != null">
+                set_price = #{setPrice,jdbcType=INTEGER},
+            </if>
+            <if test="setMonth != null">
+                set_month = #{setMonth,jdbcType=DECIMAL},
+            </if>
+            <if test="setYear != null">
+                set_year = #{setYear,jdbcType=DECIMAL},
+            </if>
+            <if test="setType != null">
+                set_type = #{setType,jdbcType=VARCHAR},
+            </if>
+            <if test="setTime != null">
+                set_time = #{setTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where set_id = #{setId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.stopcar.pojo.SetTable">
+        update set_table
+        set set_name = #{setName,jdbcType=VARCHAR},
+        set_pwd = #{setPwd,jdbcType=VARCHAR},
+        set_price = #{setPrice,jdbcType=INTEGER},
+        set_month = #{setMonth,jdbcType=DECIMAL},
+        set_year = #{setYear,jdbcType=DECIMAL},
+        set_type = #{setType,jdbcType=VARCHAR},
+        set_time = #{setTime,jdbcType=VARCHAR}
+        where set_id = #{setId,jdbcType=INTEGER}
+    </update>
+</mapper>

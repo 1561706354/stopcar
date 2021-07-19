@@ -1,0 +1,140 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>吴彦祖停车场</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body style="background: url(assets/media/image/q001.jpeg)" class="img-fluid">
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+
+<nav class="navbar" th:fragment="menu4">
+    <div class="container-fluid">
+
+        <div class="header-logo">
+            <a href="#">
+                <img src="assets/media/image/light-logo.png" alt="...">
+                <span class="logo-text d-none d-lg-block">吴彦祖停车场</span>
+            </a>
+        </div>
+
+    </div>
+</nav>
+<!-- end::navbar -->
+<!--<img src="assets/media/image/q001.jpeg" class="img-fluid">-->
+<!-- begin::main content -->
+
+<main class="main-content">
+
+    <div class="container-fluid">
+        <div class="col-lg-8" style="background-color:rgba(0,0,0,0.0)">
+        <!-- begin::page header -->
+        <div class="col-lg-12" >
+            <div class="page-header d-md-flex justify-content-between align-items-center ">
+                <h4>停|取车</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-t-0">
+                        <li class="breadcrumb-item active" aria-current="page">欢迎您的到来！</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- end::page header -->
+
+
+            <div class="card">
+
+                <div class="card-body">
+                    <p class="card-text">当前剩余车位:</p>
+
+                    <span><h3 th:text="${port}"></h3></span>
+
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">车牌号</h5>
+                    <form class="needs-validation" novalidate action="/insertRed" method="post"
+                          enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="col-sm-6 mb-4">
+                                <label for="validationTooltip01">车牌号</label>
+                                <input type="file" name="file" class="form-control" id="validationTooltip01"
+                                       placeholder="晋M52358"
+                                       required="required">
+
+                                <div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary offset-md-4 active">停车</button>
+                                </div>
+                                <span style="color: red" th:text="${int}"></span>
+                                <span style="color: red" th:text="${off}"></span>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">车牌号</h5>
+                    <form class="needs-validation" novalidate action="/updateRed" method="post"
+                          enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="col-sm-6 mb-4">
+                                <label for="validationTooltip01">车牌号</label>
+                                <input type="file" name="file" class="form-control" id="validationTooltip02"
+                                       placeholder="晋M52358"
+                                       required="required">
+
+                                <div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary offset-md-4 active">取车</button>
+                                    <span style="color: red"><h3 th:text="${out1}"></h3></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+</main>
+
+<!-- end::main content -->
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+﻿<!doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>吴彦祖停车场</title>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="jss/jsapi.js"></script>
+    <script type="text/javascript" src="jss/corechart.js"></script>
+    <script type="text/javascript" src="jss/jquery.gvChart-1.0.1.min.js"></script>
+    <script type="text/javascript" src="jss/jquery.ba-resize.min.js"></script>
+
+    <script type="text/javascript">
+        gvChartInit();
+        $(document).ready(function () {
+            $('#myTable5').gvChart({
+                chartType: 'PieChart',
+                gvSettings: {
+                    vAxis: {title: 'No of players'},
+                    hAxis: {title: 'Month'},
+                    width: 600,
+                    height: 350
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        gvChartInit();
+        $(document).ready(function () {
+            $('#myTable1').gvChart({
+                chartType: 'PieChart',
+                gvSettings: {
+                    vAxis: {title: 'No of players'},
+                    hAxis: {title: 'Month'},
+                    width: 600,
+                    height: 350
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<!-- begin::sidebar -->
+<!--<div class="sidebar" th:replace="model::menu1"></div>-->
+<!-- end::sidebar -->
+<!-- ******************************************* -->
+<!-- begin::side menu -->
+<div class="side-menu" th:replace="model::menu2"></div>
+<!-- ******************************************* -->
+<!-- end::side menu -->
+
+<!-- begin::navbar -->
+<nav class="navbar" th:replace="model::menu3"></nav>
+<!-- end::navbar -->
+
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>消费统计</h4>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb m-t-0">
+                    <li class="breadcrumb-item"><a href="#">消费</a></li>
+                </ol>
+            </nav>
+        </div>
+        <!-- end::page header -->
+
+        <!--查询所有车位-->
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h5>消费</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <caption>消费费用</caption>
+                        <thead>
+                        <tr>
+                            <th>总消费</th>
+                            <th>年卡</th>
+                            <th>季卡</th>
+                            <th>月卡</th>
+                            <th>普通</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th th:text="${heji}">1200</th>
+                            <td th:text="${yyear}">540</td>
+                            <td th:text="${jika}">300</td>
+                            <td th:text="${yueka}">150</td>
+                            <td th:text="${sumR}">180</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>总人数</th>
+                            <th>年卡</th>
+                            <th>月卡</th>
+                            <th>季卡</th>
+                            <th>免费</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th th:text="${num}">1000</th>
+                            <td th:text="${ccyear}">450</td>
+                            <td th:text="${cc1num}">550</td>
+                            <td th:text="${yuenum}">550</td>
+                            <td th:text="${free}">550</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+<!-- end::main content -->
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+</html>
